@@ -43,8 +43,8 @@ export const showHide = (showAt = true) => {
             const matchedBreakpoint = this.breakpoints[this.prop.breakpoint]
 
             if (typeof matchedBreakpoint === typeof 1) {
-                const andAbove = window.innerWidth >= this.breakpoints[this.prop.breakpoint]
-                const within = window.innerWidth <= this.breakpoints[this.prop.breakpoint]
+                const andAbove = window.innerWidth >= matchedBreakpoint
+                const within = window.innerWidth <= matchedBreakpoint
     
                 let show = true;
     

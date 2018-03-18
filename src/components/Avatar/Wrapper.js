@@ -22,8 +22,8 @@ const Default = Box.extend`
   top: 0;
   text-align: center;
   line-height: 5rem;
-  font-size: 1.5rem;
-  background: #d2d2d2;
+  font-size: 2rem;
+  background: #d0ccc8;
   opacity: ${props => props.loaded ? 0 : 1};
   transition: opacity 0.3s;
   will-change: opacity;

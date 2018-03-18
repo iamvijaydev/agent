@@ -1,10 +1,10 @@
-import data from './db'
+import { data } from './db'
 
 export class MockFetch {
     constructor() {
-        this.body = new ReadableStream()
+        this.body = 'new ReadableStream()'
         this.bodyUsed = false
-        this.headers = new Headers()
+        this.headers = 'new window.Headers()'
         this.ok = true
         this.redirected = false
         this.status = 200
@@ -136,4 +136,3 @@ export class MockFetch {
 }
 
 export const mockFetch = new MockFetch()
-export const fetch = mockFetch.fetch

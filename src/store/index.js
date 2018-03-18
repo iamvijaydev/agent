@@ -1,8 +1,12 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk'
+
 import reducers from './rootReducer';
 
 const configureStore = (preloadedState) => {
-  const enhancers = [];
+  const enhancers = [
+    applyMiddleware(reduxThunk)
+  ];
 
   if (process.env.NODE_ENV === 'development') {
     const devToolsExtension = window.devToolsExtension
@@ -20,5 +24,14 @@ const configureStore = (preloadedState) => {
     )
   );
 };
+
+// const enhancer = compose(
+//     // Middleware you want to use in development:
+//     applyMiddleware(reduxThunk, reduxPackMiddleware),
+//     // Required! Enable Redux DevTools with the monitors you chose
+//     DevTools.instrument()
+// );
+
+// const store = createStore(rootReducer, initialState, enhancer);
 
 export default configureStore;

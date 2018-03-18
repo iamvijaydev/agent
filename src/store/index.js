@@ -25,13 +25,4 @@ const configureStore = (preloadedState) => {
   );
 };
 
-// const enhancer = compose(
-//     // Middleware you want to use in development:
-//     applyMiddleware(reduxThunk, reduxPackMiddleware),
-//     // Required! Enable Redux DevTools with the monitors you chose
-//     DevTools.instrument()
-// );
-
-// const store = createStore(rootReducer, initialState, enhancer);
-
 export default configureStore;

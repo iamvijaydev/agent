@@ -16,10 +16,10 @@ class App extends Component {
               <Link to="/">Merchants</Link>
             </li>
             <li>
-              <Link to="/view/1010">View Merchant</Link>
+              <Link to="/view/120000">View Merchant</Link>
             </li>
             <li>
-              <Link to="/edit/1010">Edit Merchant</Link>
+              <Link to="/edit/120000">Edit Merchant</Link>
             </li>
             <li>
               <Link to="/add">Add Merchant</Link>

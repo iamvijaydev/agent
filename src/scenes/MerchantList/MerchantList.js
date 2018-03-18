@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { Header } from '../../components/Header'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -11,6 +12,8 @@ export class MerchantList extends React.Component {
             pageNo: 1,
             perPage: 10
         }
+
+        this.onAdd = this.onAdd.bind(this)
     }
 
     componentWillMount() {
@@ -25,8 +28,23 @@ export class MerchantList extends React.Component {
         })
     }
 
+    onAdd() {
+        this.props.history.push('/add')
+    }
+
     render() {
-        return <div>Merchant List</div>
+        return (
+            <div>
+                <Header
+                    title="Merchants"
+                    hasAction
+                    actionTitle="Add"
+                    actionIcon="add"
+                    actionCallback={this.onAdd}
+                />
+                <div>Merchant List</div>
+            </div>
+        )
     }
 }
 

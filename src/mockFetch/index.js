@@ -75,7 +75,7 @@ export class MockFetch {
         nextPage,
         count: this._data.length
       },
-      data: this._data.slice(offset, perPage)
+      data: this._data.slice(offset, offset + perPage)
     }
   }
 

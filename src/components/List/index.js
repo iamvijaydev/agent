@@ -16,18 +16,13 @@ const List = styled.div`
 const Item = styled.div`
   padding: 1.5rem 0 1rem;
   display: flex;
-  cursor: pointer;
+  cursor: ${props => props.noCursor ? 'default' : 'pointer'};
 
   &:not(:last-child) {
     border-bottom: 1px solid #eaeaea;
   }
 `
 
-const ItemDetails = styled.div`
-
-`
-
 List.Item = Item
-List.ItemDetails = ItemDetails
 
 export default List

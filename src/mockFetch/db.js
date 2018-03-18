@@ -88,4 +88,31 @@ export const data = [{
   "phone": "(022) 2232-6633",
   "hasPremium": false,
   "bids": []
+}, {
+  "id": "120011",
+  "firstname": "Sybille",
+  "lastname": "Kiesling",
+  "avatarUrl": "",
+  "email": "sybille@kiesling.neumail.com",
+  "phone": "(012) 6323-3436",
+  "hasPremium": true,
+  "bids": []
+}, {
+  "id": "120012",
+  "firstname": "Jaqueline",
+  "lastname": "Waldmüller",
+  "avatarUrl": "",
+  "email": "jaqueline@waldmüller.neumail.com",
+  "phone": "(012) 3422-5632",
+  "hasPremium": true,
+  "bids": []
+}, {
+  "id": "120013",
+  "firstname": "Edgar",
+  "lastname": "Hohenlohe",
+  "avatarUrl": "",
+  "email": "Edgar@hohenlohe.neumail.com",
+  "phone": "(022) 2232-6633",
+  "hasPremium": false,
+  "bids": []
 }]

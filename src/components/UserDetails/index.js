@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Styled from './Styled'
 
@@ -24,3 +25,13 @@ export const UserDetails = ({
         </Styled>
     )
 }
+
+UserDetails.displayName = 'UserDetails';
+
+UserDetails.propTypes = {
+  name: PropTypes.string,
+  hasPremium: PropTypes.bool,
+  email: PropTypes.string,
+  phone: PropTypes.string,
+  bids: PropTypes.number
+};

@@ -39,13 +39,16 @@ export class MockFetch {
             return this._merchantDetails()
         }
 
-        return {}
+        return {
+            meta: {},
+            data: {}
+        }
     }
 
     _getMerchantList() {
         const paramPart = this.url.slice(this.url.indexOf('?') + 1)
         const paramAry = paramPart.split('&')
-        let pageNo = 0
+        let pageNo = 1
         let perPage = 10
 
         paramAry.forEach(param => {
@@ -55,14 +58,25 @@ export class MockFetch {
 
             if (!isNaN(value)) {
                 if (key === 'page_no') {
-                    pageNo = value > 0 ? value - 1 : 0
+                    pageNo = value > 0 ? value : 0
                 } else if (key === 'per_page') {
                     perPage = value <= 0 ? 1 : value
                 }
             }
         })
 
-        return this._data.slice(pageNo, perPage)
+        const totalPages = Math.ceil(this._data.length / perPage)
+        const possibleNextPage = pageNo + 1
+        const nextPage = possibleNextPage > totalPages ? null : possibleNextPage
+        const offset = ((pageNo - 1) * perPage + 1) - 1
+        
+        return {
+            meta: {
+                nextPage,
+                count: this._data.length
+            },
+            data: this._data.slice(offset, perPage)
+        }
     }
 
     _merchantDetails() {
@@ -91,8 +105,11 @@ export class MockFetch {
         })
 
         return {
-            id,
-            message: 'Saved successfully.'
+            meta: {},
+            data: {
+                id,
+                message: 'Saved successfully.'
+            }
         }
     }
 
@@ -109,15 +126,21 @@ export class MockFetch {
                 }
 
                 return {
-                    id: idStr,
-                    message: 'Updated successfully.'
+                    meta: {},
+                    data: {
+                        id: idStr,
+                            message: 'Updated successfully.'
+                    }
                 }
             }
         }
 
         return {
-            id: idInt,
-            message: 'Record not found.'
+            meta: {},
+            data: {
+                id: idInt,
+                message: 'Record not found.'
+            }
         }
     }
 
@@ -127,11 +150,17 @@ export class MockFetch {
             const found = this._data.find(({ id }) => id === idStr)
     
             if (!!found) {
-                return found
+                return {
+                    meta: {},
+                    data: found
+                }
             }
         }
 
-        return {}
+        return {
+            meta: {},
+            data: {}
+        }
     }
 }
 

@@ -6,7 +6,7 @@ describe('Mock Fetch for GET', () => {
     
     return mockFetch.fetch('/merchant?')
       .then(response => {
-        expect(response.json()).toHaveLength(10);
+        expect(response.json().data).toHaveLength(10);
       });
   });
 
@@ -15,16 +15,20 @@ describe('Mock Fetch for GET', () => {
     
     return mockFetch.fetch('/merchant?per_page=2')
       .then(response => {
-        expect(response.json()).toHaveLength(2);
+        expect(response.json().data).toHaveLength(2);
       });
   });
 
-  test('no results when route does\'nt match', () => {
+  test('no results when route doesn\'t match', () => {
+    const noResult = {
+      meta: {},
+      data: {}
+    }
     expect.assertions(1);
     
     return mockFetch.fetch('/merchant')
       .then(response => {
-        expect(response.json()).toMatchObject({});
+        expect(response.json()).toMatchObject(noResult);
       });
   });
 });

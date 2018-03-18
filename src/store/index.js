@@ -1,8 +1,12 @@
-import { createStore, compose } from 'redux';
-import reducers from './reducers';
+import { createStore, compose, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk'
+
+import reducers from './rootReducer';
 
 const configureStore = (preloadedState) => {
-  const enhancers = [];
+  const enhancers = [
+    applyMiddleware(reduxThunk)
+  ];
 
   if (process.env.NODE_ENV === 'development') {
     const devToolsExtension = window.devToolsExtension

@@ -1,7 +1,9 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
-export default class MerchantList extends React.Component {
+import { fetchMerchantList } from './data/actions'
+
+export class MerchantList extends React.Component {
     constructor(props) {
         super(props)
 
@@ -11,15 +13,32 @@ export default class MerchantList extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const {
+            pageNo: page_no,
+            perPage: per_page
+        } = this.state;
+        
+        this.props.fetchMerchantList({
+            page_no,
+            per_page
+        })
+    }
+
     render() {
         return <div>Merchant List</div>
     }
 }
 
-// const mapStateToProps = (state) => {
-// }
+const mapStateToProps = state => ({
+    meta: state.merchantList.meta,
+    data: state.merchantList.data,
+    isLoading: state.merchantList.isLoading,
+    error: state.merchantList.error,
+})
 
-// const mapDispatchToProps = (dispatch) => {
-// }
+const mapDispatchToProps = dispatch => ({
+    fetchMerchantList: options => dispatch(fetchMerchantList(options))
+})
 
-// export default connect(mapStateToProps, mapDispatchToProps)(MerchantList)
+export default connect(mapStateToProps, mapDispatchToProps)(MerchantList)

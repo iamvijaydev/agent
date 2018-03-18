@@ -2,7 +2,7 @@ export const data = [{
   "id": "120000",
   "firstname": "Mathias",
   "lastname": "Raedler",
-  "avatarUrl": "",
+  "avatarUrl": "https://lh3.googleusercontent.com/-i2LsXB5k-xE/AAAAAAAAAAI/AAAAAAAAAAA/AGi4gfwqFSvmKgKuorD9fQcJPBA_tCUBfw/s32-c-mo/photo.jpg",
   "email": "mathias@raedler.neumail.com",
   "phone": "(032) 5343-5532",
   "hasPremium": false,

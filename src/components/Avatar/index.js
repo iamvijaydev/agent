@@ -18,9 +18,12 @@ export class Avatar extends React.Component {
     this.img.src = this.props.src
   }
 
-  componentWillUpdate() {
+  componentWillUpdate(nextProps) {
     this.img.removeEventListener('load', this.onLoad)
-    this.setState({ loaded: false })
+
+    if (nextProps.src !== this.props.src) {
+      this.setState({ loaded: false })
+    }
   }
 
   componentDidUpdate() {
@@ -51,7 +54,7 @@ export class Avatar extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Wrapper.Default loaded={this.state.loaded} />
+        <Wrapper.Default loaded={this.state.loaded}>{this.props.alt.slice(0,1).toUpperCase()}</Wrapper.Default>
         <Wrapper.Img alt={this.props.alt} innerRef={node => this.img = node} />
       </Wrapper>
     )

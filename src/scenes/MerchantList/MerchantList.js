@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
+import List from '../../components/List'
+import { Avatar } from '../../components/Avatar'
+import { UserDetails } from '../../components/UserDetails'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -15,6 +18,7 @@ export class MerchantList extends React.Component {
     }
 
     this.onAdd = this.onAdd.bind(this)
+    this.onDetails = this.onDetails.bind(this)
   }
 
   componentWillMount() {
@@ -33,6 +37,10 @@ export class MerchantList extends React.Component {
     this.props.history.push('/add')
   }
 
+  onDetails(id) {
+    this.props.history.push(`/view/${id}`)
+  }
+
   render() {
     return (
       <Wrapper>
@@ -44,7 +52,30 @@ export class MerchantList extends React.Component {
             actionCallback={this.onAdd}
         />
         <Wrapper.Content>
-          <div>Merchant List</div>
+          <List>
+            {
+              this.props.data.map((merchant) => {
+                return (
+                  <List.Item
+                    key={merchant.id}
+                    onClick={() => this.onDetails(merchant.id)}
+                  >
+                    <Avatar
+                      src={merchant.avatarUrl}
+                      alt={`${merchant.firstname} ${merchant.lastname}`}
+                    />
+                    <UserDetails
+                      name={`${merchant.firstname} ${merchant.lastname}`}
+                      hasPremium={merchant.hasPremium}
+                      email={merchant.email}
+                      phone={merchant.phone}
+                      bids={merchant.bids.length}
+                    />
+                  </List.Item>
+                )
+              })
+            }
+          </List>
         </Wrapper.Content>
       </Wrapper>
     )

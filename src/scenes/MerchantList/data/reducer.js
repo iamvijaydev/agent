@@ -10,6 +10,10 @@ const defaultError = {
     statusText: ''
 }
 const defaultState = {
+    meta: {
+        nextPage: null,
+        count: null
+    },
     data: [],
     isLoading: false,
     error: defaultError
@@ -26,9 +30,9 @@ export default (state = defaultState, action) => {
 
         case FETCHED:
             return {
-                ...state,
+                meta: action.result.meta,
+                data: action.result.data,
                 isLoading: false,
-                data: action.data,
                 error: defaultError
             }
         

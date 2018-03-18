@@ -1,4 +1,4 @@
-import { fetch } from '../../../mockFetch'
+import { mockFetch } from '../../../mockFetch'
 import {
     FETCHING,
     FETCHED,
@@ -7,9 +7,9 @@ import {
 
 const fetching = () => ({ type: FETCHING })
 
-const fetched = data => ({
+const fetched = result => ({
     type: FETCHED,
-    data
+    result
 })
 
 const failed = error => ({
@@ -20,7 +20,7 @@ const failed = error => ({
 export const fetchMerchantList = ({ page_no, per_page }) => dispatch => {
     dispatch(fetching())
 
-    fetch(`/merchant?page_no=${page_no}&per_page=${per_page}`)
+    mockFetch.fetch(`/merchant?page_no=${page_no}&per_page=${per_page}`)
         .then(response => {
             if (response.ok) {
                 return response.json()
@@ -31,7 +31,7 @@ export const fetchMerchantList = ({ page_no, per_page }) => dispatch => {
                 })
             }
         })
-        .then(data => dispatch(fetched(data)))
+        .then(result => dispatch(fetched(result)))
         .catch(error => dispatch(failed({
             has: true,
             ...error

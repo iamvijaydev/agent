@@ -1,44 +1,44 @@
 import { mockFetch } from '../../../mockFetch'
 import {
-    FETCHING,
-    FETCHED,
-    FAILED,
-    CLEAR
+  FETCHING,
+  FETCHED,
+  FAILED,
+  CLEAR
 } from './constants'
 
 const fetching = () => ({ type: FETCHING })
 
 const fetched = data => ({
-    type: FETCHED,
-    data
+  type: FETCHED,
+  data
 })
 
 const failed = error => ({
-    type: FAILED,
-    error
+  type: FAILED,
+  error
 })
 
 export const fetchMerchantItem = id => dispatch => {
-    dispatch(fetching())
+  dispatch(fetching())
 
-    mockFetch.fetch(`/merchant/${id}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            } else {
-                return Promise.reject({
-                    status: response.status,
-                    statusText: response.statusText
-                })
-            }
+  mockFetch.fetch(`/merchant/${id}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return Promise.reject({
+            status: response.status,
+            statusText: response.statusText
         })
-        .then(result => dispatch(fetched(result.data)))
-        .catch(error => dispatch(failed({
-            has: true,
-            ...error
-        })))
+      }
+    })
+    .then(result => dispatch(fetched(result.data)))
+    .catch(error => dispatch(failed({
+      has: true,
+      ...error
+    })))
 }
 
 export const clearData = () => ({
-    type: CLEAR
+  type: CLEAR
 })

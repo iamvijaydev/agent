@@ -5,6 +5,6 @@ import merchantItem from '../scenes/MerchantItem/data/reducer';
 // import merchantAddEdit from '../scenes/MerchantAddEdit/data/reducer';
 
 export default combineReducers({
-    merchantList,
-    merchantItem
+  merchantList,
+  merchantItem
 })

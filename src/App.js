@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.png';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+
+import MerchantList from './scenes/MerchantList'
+import MerchantItem from './scenes/MerchantItem'
+import MerchantAddEdit from './scenes/MerchantAddEdit'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome</h2>
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Merchants</Link>
+            </li>
+            <li>
+              <Link to="/view/1010">View Merchant</Link>
+            </li>
+            <li>
+              <Link to="/edit/1010">Edit Merchant</Link>
+            </li>
+            <li>
+              <Link to="/add">Add Merchant</Link>
+            </li>
+          </ul>
+
+          <hr />
+
+          <Route exact path="/" component={MerchantList} />
+          <Route path="/view/:id" component={MerchantItem} />
+          <Route path="/edit/:id" component={MerchantAddEdit} />
+          <Route path="/add" component={MerchantAddEdit} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }

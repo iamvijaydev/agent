@@ -2,13 +2,14 @@ import styled from 'styled-components'
 
 const Styled = styled.header`
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
   background-color: #3F51B5;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  left: 0;
-  right: 0;
-  height: 5rem;
   color: #fff;
   padding: 0 2rem;
 

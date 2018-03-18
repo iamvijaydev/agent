@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
+import { Wrapper } from '../../components/Wrapper'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -34,7 +35,7 @@ export class MerchantList extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <Header
             title="Merchants"
             hasAction
@@ -42,8 +43,10 @@ export class MerchantList extends React.Component {
             actionIcon="add"
             actionCallback={this.onAdd}
         />
-        <div>Merchant List</div>
-      </div>
+        <Wrapper.Content>
+          <div>Merchant List</div>
+        </Wrapper.Content>
+      </Wrapper>
     )
   }
 }

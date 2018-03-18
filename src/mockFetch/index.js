@@ -135,8 +135,5 @@ export class MockFetch {
     }
 }
 
-const mockFetch = new MockFetch()
-const fetch = mockFetch.fetch
-
-export { mockFetch }
-export default fetch
+export const mockFetch = new MockFetch()
+export const fetch = mockFetch.fetch

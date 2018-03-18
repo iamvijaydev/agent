@@ -11,23 +11,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Merchants</Link>
-            </li>
-            <li>
-              <Link to="/view/120000">View Merchant</Link>
-            </li>
-            <li>
-              <Link to="/edit/120000">Edit Merchant</Link>
-            </li>
-            <li>
-              <Link to="/add">Add Merchant</Link>
-            </li>
-          </ul>
-
-          <hr />
-
           <Route exact path="/" component={MerchantList} />
           <Route path="/view/:id" component={MerchantItem} />
           <Route path="/edit/:id" component={MerchantAddEdit} />

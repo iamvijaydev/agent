@@ -150,21 +150,11 @@ export class MerchantList extends React.Component {
       )
     })
 
-    if (showMessage) {
+    if (data.length) {
       items.unshift(
         <List.Item
           noCursor
-          key="PLACEHOLDER"
-        >
-          <Placeholder message={message} status={status} />
-        </List.Item>
-      )
-    }
-    if (data.length) {
-      items.push(
-        <List.Item
-          noCursor
-          key="PAGINATION"
+          key="PAGINATION_TOP"
         >
           <Pagination
             onPerPageChange={this.onPerPageChange}
@@ -175,6 +165,32 @@ export class MerchantList extends React.Component {
             onPrev={this.onPrev}
             onNext={this.onNext}
           />
+        </List.Item>
+      )
+      items.push(
+        <List.Item
+          noCursor
+          key="PAGINATION_BOTTOM"
+        >
+          <Pagination
+            onPerPageChange={this.onPerPageChange}
+            perPage={this.state.perPage}
+            pageNo={this.state.pageNo}
+            results={this.props.data.length}
+            count={this.state.count}
+            onPrev={this.onPrev}
+            onNext={this.onNext}
+          />
+        </List.Item>
+      )
+    }
+    if (showMessage) {
+      items.unshift(
+        <List.Item
+          noCursor
+          key="PLACEHOLDER"
+        >
+          <Placeholder message={message} status={status} />
         </List.Item>
       )
     }

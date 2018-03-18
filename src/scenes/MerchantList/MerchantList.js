@@ -186,11 +186,12 @@ export class MerchantList extends React.Component {
     return (
       <Wrapper>
         <Header
-            title="Merchants"
-            hasAction
-            actionTitle="Add"
-            actionIcon="add"
-            actionCallback={this.onAdd}
+          title="Merchants"
+          hasAction
+          actionTitle="Add"
+          actionIcon="add"
+          actionCallback={this.onAdd}
+          showLoader={this.props.isLoading}
         />
         <Wrapper.Content>
           <List>{this.getContent()}</List>

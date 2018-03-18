@@ -7,6 +7,7 @@ import List from '../../components/List'
 import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
 import { Pagination } from '../../components/Pagination'
+import { Placeholder } from '../../components/Placeholder'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -107,6 +108,80 @@ export class MerchantList extends React.Component {
     })
   }
 
+  getContent() {
+    const {
+      isLoading,
+      data,
+      error
+    } = this.props
+
+    let message = ''
+    let status = 'default'
+
+    if (isLoading) {
+      message = 'Loading...'
+    } else if (error.has) {
+      message = 'Fetch failed!'
+      status = 'error'
+    } else if (!data.length) {
+      message = 'No results.'
+    }
+
+    const showMessage = (!data.length && message.length) || error.has
+
+    const items = data.map((merchant) => {
+      return (
+        <List.Item
+          key={merchant.id}
+          onClick={() => this.onDetails(merchant.id)}
+        >
+          <Avatar
+            src={merchant.avatarUrl}
+            alt={`${merchant.firstname} ${merchant.lastname}`}
+          />
+          <UserDetails
+            name={`${merchant.firstname} ${merchant.lastname}`}
+            hasPremium={merchant.hasPremium}
+            email={merchant.email}
+            phone={merchant.phone}
+            bids={merchant.bids.length}
+          />
+        </List.Item>
+      )
+    })
+
+    if (showMessage) {
+      items.unshift(
+        <List.Item
+          noCursor
+          key="PLACEHOLDER"
+        >
+          <Placeholder message={message} status={status} />
+        </List.Item>
+      )
+    }
+    if (data.length) {
+      items.push(
+        <List.Item
+          noCursor
+          key="PAGINATION"
+        >
+          <Pagination
+            onPerPageChange={this.onPerPageChange}
+            perPage={this.state.perPage}
+            pageNo={this.state.pageNo}
+            results={this.props.data.length}
+            count={this.state.count}
+            onPrev={this.onPrev}
+            onNext={this.onNext}
+          />
+        </List.Item>
+      )
+    }
+
+    return items
+  }
+
   render() {
     return (
       <Wrapper>
@@ -118,41 +193,7 @@ export class MerchantList extends React.Component {
             actionCallback={this.onAdd}
         />
         <Wrapper.Content>
-          <List>
-            {
-              this.props.data.map((merchant) => {
-                return (
-                  <List.Item
-                    key={merchant.id}
-                    onClick={() => this.onDetails(merchant.id)}
-                  >
-                    <Avatar
-                      src={merchant.avatarUrl}
-                      alt={`${merchant.firstname} ${merchant.lastname}`}
-                    />
-                    <UserDetails
-                      name={`${merchant.firstname} ${merchant.lastname}`}
-                      hasPremium={merchant.hasPremium}
-                      email={merchant.email}
-                      phone={merchant.phone}
-                      bids={merchant.bids.length}
-                    />
-                  </List.Item>
-                )
-              })
-            }
-            <List.Item noCursor>
-              <Pagination
-                onPerPageChange={this.onPerPageChange}
-                perPage={this.state.perPage}
-                pageNo={this.state.pageNo}
-                results={this.props.data.length}
-                count={this.state.count}
-                onPrev={this.onPrev}
-                onNext={this.onNext}
-              />
-            </List.Item>
-          </List>
+          <List>{this.getContent()}</List>
         </Wrapper.Content>
       </Wrapper>
     )

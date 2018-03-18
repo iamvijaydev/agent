@@ -32,7 +32,7 @@ const Bids = styled.span`
     position: absolute;
     top: 1rem;
     right: 0;
-    border: 1px solid #d2d2d2;
+    background: #e8e4e1;
     height: 3rem;
     border-radius: 20%;
     text-align: center;

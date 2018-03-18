@@ -80,16 +80,17 @@ export class MockFetch {
     }
 
     _merchantDetails() {
-        const method = this._options.method.toLowerCase()
+        const gotMethod = this._options.method
+        const method = typeof gotMethod === typeof '' ? gotMethod.toLowerCase() : ''
         const id = this.url.split('/merchant/')[1]
         const idInt = parseInt(id, 10)
-
+        
         if (method === 'post') {
             return this._onPost()
         } else if (method === 'put' || method === 'patch') {
             return this._onPutPatch(idInt)
         }
-
+        
         return this._onGet(idInt)
     }
 

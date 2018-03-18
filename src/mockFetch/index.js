@@ -25,7 +25,7 @@ export class MockFetch {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(this)
-      }, 300)
+      }, 1000)
     })
   }
 

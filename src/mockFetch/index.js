@@ -97,9 +97,8 @@ export class MockFetch {
     }
 
     _onPutPatch(idInt) {
-        const body = JSON.parse(this._options.body)
-            
         if (!isNaN(idInt)) {
+            const body = JSON.parse(this._options.body)
             const idStr = idInt.toString()
             const foundIndex = this._data.findIndex(({ id }) => id === idStr)
 
@@ -123,11 +122,13 @@ export class MockFetch {
     }
 
     _onGet(idInt) {
-        const idStr = idInt.toString()
-        const found = this._data.find(({ id }) => id === idStr)
-
-        if (!!found) {
-            return found
+        if (!isNaN(idInt)) {
+            const idStr = idInt.toString()
+            const found = this._data.find(({ id }) => id === idStr)
+    
+            if (!!found) {
+                return found
+            }
         }
 
         return {}

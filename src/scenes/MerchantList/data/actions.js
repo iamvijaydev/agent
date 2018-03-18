@@ -3,7 +3,7 @@ import {
     FETCHING,
     FETCHED,
     FAILED
-} from './actions'
+} from './constants'
 
 const fetching = () => ({ type: FETCHING })
 

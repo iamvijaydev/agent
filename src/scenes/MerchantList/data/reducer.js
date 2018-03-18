@@ -2,7 +2,7 @@ import {
     FETCHING,
     FETCHED,
     FAILED
-} from './actions'
+} from './constants'
 
 const defaultError = {
     has: false,

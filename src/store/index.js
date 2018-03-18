@@ -1,5 +1,5 @@
 import { createStore, compose } from 'redux';
-import reducers from './reducers';
+import reducers from './rootReducer';
 
 const configureStore = (preloadedState) => {
   const enhancers = [];

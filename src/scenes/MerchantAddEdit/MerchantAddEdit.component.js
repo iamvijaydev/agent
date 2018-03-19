@@ -346,10 +346,19 @@ export default class MerchantAddEdit extends React.Component {
           hasBackBtn
           backCallback={this.onBack}
           title={this.props.match.params.id ? 'Edit Merchant' : 'Add Merchant'}
-          showLoader={this.props.isLoading}
+          showLoader={this.props.isLoading || this.props.isSaving}
         />
         <Wrapper.Content>
           <List>
+            <List.Item
+              noCursor
+              justify="center"
+            >
+              <Avatar
+                src={this.state.avatarUrl}
+                alt={this.state.firstname}
+              />
+            </List.Item>
             <List.Item>
               <div>
                 <input

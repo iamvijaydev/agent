@@ -22,7 +22,7 @@ export const UserDetails = ({
           hasPremium &&
           <Styled.Premium>
             <ShowAt breakpoint="mediumAndAbove">
-              <span>Premium</span>
+              <em>Premium</em>
             </ShowAt>
             <HideAt breakpoint="withinSmall">
               <i className="material-icons" title="Premium">weekend</i>
@@ -30,8 +30,8 @@ export const UserDetails = ({
           </Styled.Premium>
         }
       </Styled.Name>
-      <Styled.Contact>{email}</Styled.Contact>
-      <Styled.Contact>{phone}</Styled.Contact>
+      <Styled.Contact><i className="material-icons">mail</i>{email}</Styled.Contact>
+      <Styled.Contact><i className="material-icons">call</i>{phone}</Styled.Contact>
       <Styled.Bids title={`${bids} bids`}>{bids}</Styled.Bids>
     </Styled>
   )

@@ -26,6 +26,14 @@ const Contact = styled.span`
     line-height: 1;
     padding: 0 4rem 0.5rem 0;
     color: #6f6f7b;
+
+    .material-icons {
+      font-size: 1.2rem;
+      position: relative;
+      top: 2px;
+      padding-right: 0.5rem;
+      color: #d0ccc8;
+    }
 `
 
 const Bids = styled.span`
@@ -41,8 +49,26 @@ const Bids = styled.span`
     padding: 0 1.1rem;
 `
 
+const Premium = styled.span`
+    margin-left: 0.5rem;
+
+    em {
+      background: #ff9719;
+      color: #fff;
+      line-height: 1;
+      font-size: 1rem;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      font-style: normal;
+      position: relative;
+      top: -3px;
+    }
+`
+
 Styled.Name = Name
 Styled.Contact = Contact
 Styled.Bids = Bids
+Styled.Premium = Premium
 
 export default Styled

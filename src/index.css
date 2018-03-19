@@ -1,17 +1,23 @@
 html {
-  font-size: 52.5%;
+  font-size: 62.5%;
   height: 100%;
-}
-
-@media(min-width: 544px) {
-  html {
-    font-size: 62.5%;
-  }
 }
 
 @media(min-width: 768px) {
   html {
     font-size: 72.5%;
+  }
+}
+
+@media(min-width: 992px) {
+  html {
+    font-size: 82.5%;
+  }
+}
+
+@media(min-width: 1200px) {
+  html {
+    font-size: 92.5%;
   }
 }
 
@@ -25,5 +31,5 @@ body {
   position: relative;
   color: #0f0f2d;
   background: #f3f3f3;
-  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }

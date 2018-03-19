@@ -11,6 +11,10 @@ const List = styled.div`
     box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
     border-radius: 3px;
   }
+
+  @media(min-width: 992px) {
+    width: 768px;
+  }
 `
 
 const Item = styled.div`

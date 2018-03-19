@@ -30,60 +30,67 @@ export class MerchantItem extends React.Component {
     this.props.history.goBack()
   }
 
-  getContent() {
-    const {
-      data,
-      isLoading,
-      error
-    } = this.props
+  getLoadingContent() {
+    let tenItems = Array.from({ length: 10 }, (e, i) => i)
+    let items = [];
 
-    let items = []
-    let message = ''
-    let status = 'default'
-
-    if (error.has) {
-      message = 'Fetch failed!'
-      status = 'error'
-    } else if (!isLoading && !data.id.length) {
-      message = 'No results.'
-    }
-
-    if (isLoading) {
-      items = Array
-        .from({ length: 10 }, (e, i) => i)
-        .map((i) => {
-          return (
-            <List.Item
-              key={i}
-              noCursor
-            >
-              <p>Loading...</p>
-              <p>Loading...</p>
-              <p>Loading...</p>
-            </List.Item>
-          )
-        })
-        items.unshift(
-          <List.Item
-            key="test1"
-            noCursor
-          >
-            <Avatar showLoading />
-            <UserDetails showLoading />
-          </List.Item>
-        )
-    } else if (data.id.length) {
-      items = data.bids.map((bid) => {
+    if (this.props.isLoading) {
+      items = tenItems.map((i) => {
         return (
           <List.Item
-            key={bid.id}
+            key={i}
+            noCursor
           >
-            <p>{bid.carTitle}</p>
-            <p>{`${moment(bid.created)}`}</p>
-            <p>{bid.amount}</p>
+            <p>Loading...</p>
+            <p>Loading...</p>
+            <p>Loading...</p>
           </List.Item>
         )
       })
+      items.unshift(
+        <List.Item
+          key="LOADING_MERCHANT"
+          noCursor
+        >
+          <Avatar showLoading />
+          <UserDetails showLoading />
+        </List.Item>
+      )
+    }
+
+    return items
+  }
+
+  getLoadedContent() {
+    const { data } = this.props;
+    let items = [];
+
+    if (data.id.length) {
+
+      if (data.bids.length) {
+        items = data.bids.map((bid) => {
+          return (
+            <List.Item
+              key={bid.id}
+              noCursor
+            >
+              <p>{bid.carTitle}</p>
+              <p>{`${moment(bid.created)}`}</p>
+              <p>{bid.amount}</p>
+            </List.Item>
+          )
+        })
+      } else {
+        items.push(
+          <List.Item
+            noCursor
+            key="NO_BIDS"
+          >
+            <Placeholder message="No bids yet." />
+          </List.Item>
+        )
+      }
+
       items.unshift(
         <List.Item
           key={data.id}
@@ -102,21 +109,31 @@ export class MerchantItem extends React.Component {
           />
         </List.Item>
       )
+    }
 
-      if (!data.bids.length) {
-        items.push(
-          <List.Item
-            noCursor
-            key="NO_BIDS"
-          >
-            <Placeholder message="No bids yet." />
-          </List.Item>
-        )
-      }
+    return items;
+  }
+
+  getMessage()  {
+    const {
+      data,
+      isLoading,
+      error
+    } = this.props;
+
+    let items = []
+    let message = ''
+    let status = 'default'
+
+    if (error.has) {
+      message = 'Fetch failed!'
+      status = 'error'
+    } else if (!isLoading && !data.id.length) {
+      message = 'No result.'
     }
 
     if (message.length) {
-      items.unshift(
+      items.push(
         <List.Item
           noCursor
           key="PLACEHOLDER"
@@ -126,7 +143,15 @@ export class MerchantItem extends React.Component {
       )
     }
 
-    return items
+    return items;
+  }
+
+  getContent() {
+    return [
+      ...this.getMessage(),
+      ...this.getLoadingContent(),
+      ...this.getLoadedContent()
+    ]
   }
 
   render() {

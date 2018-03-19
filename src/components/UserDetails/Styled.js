@@ -13,7 +13,7 @@ const progress = keyframes`
 const Loading = styled.div`
   position: relative;
   overflow: hidden;
-  background: lightgrey;
+  background: #d0ccc8;
 
   &:after {
     content: '';

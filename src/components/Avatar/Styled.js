@@ -29,7 +29,7 @@ const progress = keyframes`
 const Loading = Box.extend`
   position: relative;
   overflow: hidden;
-  background: lightgrey;
+  background: #d0ccc8;
 
   &:after {
     content: '';

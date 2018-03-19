@@ -32,7 +32,7 @@ export class MerchantItem extends React.Component {
   }
 
   getLoadingContent() {
-    const tenItems = Array.from({ length: 10 }, (e, i) => i)
+    const tenItems = Array.from({ length: 5 }, (e, i) => i)
     let items = [];
 
     if (this.props.isLoading) {

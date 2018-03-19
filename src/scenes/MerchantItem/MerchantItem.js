@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import * as moment from 'moment'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
@@ -57,6 +58,9 @@ export class MerchantItem extends React.Component {
           <List.Item
             key={bid.id}
           >
+            <p>{bid.amount}</p>
+            <p>{bid.carTitle}</p>
+            <p>{`${moment(bid.created)}`}</p>
             {/* <Avatar
               src={merchant.avatarUrl}
               alt={`${merchant.firstname} ${merchant.lastname}`}
@@ -68,7 +72,6 @@ export class MerchantItem extends React.Component {
               phone={merchant.phone}
               bids={merchant.bids.length}
             /> */}
-            <p>A</p>
           </List.Item>
         )
       })
@@ -93,14 +96,17 @@ export class MerchantItem extends React.Component {
           />
         </List.Item>
       )
-      items.push(
-        <List.Item
-          noCursor
-          key="NO_BIDS"
-        >
-          <Placeholder message="No bids yet." />
-        </List.Item>
-      )
+
+      if (!data.bids.length) {
+        items.push(
+          <List.Item
+            noCursor
+            key="NO_BIDS"
+          >
+            <Placeholder message="No bids yet." />
+          </List.Item>
+        )
+      }
     }
 
     if (showMessage) {

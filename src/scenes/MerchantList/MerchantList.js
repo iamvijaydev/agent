@@ -116,40 +116,53 @@ export class MerchantList extends React.Component {
       error
     } = this.props
 
+    let items = []
     let message = ''
     let status = 'default'
 
-    if (isLoading) {
-      message = 'Loading...'
-    } else if (error.has) {
+    if (error.has) {
       message = 'Fetch failed!'
       status = 'error'
-    } else if (!data.length) {
+    } else if (!isLoading && !data.length) {
       message = 'No results.'
     }
 
     const showMessage = (!data.length && message.length) || error.has
 
-    const items = data.map((merchant) => {
-      return (
-        <List.Item
-          key={merchant.id}
-          onClick={() => this.onDetails(merchant.id)}
-        >
-          <Avatar
-            src={merchant.avatarUrl}
-            alt={`${merchant.firstname} ${merchant.lastname}`}
-          />
-          <UserDetails
-            name={`${merchant.firstname} ${merchant.lastname}`}
-            hasPremium={merchant.hasPremium}
-            email={merchant.email}
-            phone={merchant.phone}
-            bids={merchant.bids.length}
-          />
-        </List.Item>
-      )
-    })
+    if (isLoading) {
+      items = Array
+        .from({ length: 10 }, (e, i) => i)
+        .map((i) => {
+          return (
+            <List.Item key={i}>
+              <Avatar showLoading />
+              <UserDetails showLoading />
+            </List.Item>
+          )
+        })
+    } else {
+      items = data.map((merchant) => {
+        return (
+          <List.Item
+            key={merchant.id}
+            onClick={() => this.onDetails(merchant.id)}
+          >
+            <Avatar
+              src={merchant.avatarUrl}
+              alt={`${merchant.firstname} ${merchant.lastname}`}
+            />
+            <UserDetails
+              name={`${merchant.firstname} ${merchant.lastname}`}
+              hasPremium={merchant.hasPremium}
+              email={merchant.email}
+              phone={merchant.phone}
+              bids={merchant.bids.length}
+            />
+          </List.Item>
+        )
+      })
+    }
+
 
     if (data.length) {
       items.unshift(

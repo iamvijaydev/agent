@@ -6,7 +6,42 @@ export const data = [{
   "email": "mathias@raedler.neumail.com",
   "phone": "(032) 5343-5532",
   "hasPremium": false,
-  "bids": []
+  "bids": [{
+    "id": "130000",
+    "carTitle": "Audi A4",
+    "amount": 18000,
+    "created": "2018-03-12T06:58:27.260Z"
+  }, {
+    "id": "130001",
+    "carTitle": "Mercedes-Benz E",
+    "amount": 56600,
+    "created": "2018-03-05T06:58:27.260Z"
+  }, {
+    "id": "130002",
+    "carTitle": "VW New Beetle",
+    "amount": 14999,
+    "created": "2018-02-26T06:58:27.260Z"
+  }, {
+    "id": "130003",
+    "carTitle": "VW CC 2.0 TDI",
+    "amount": 12099,
+    "created": "2018-02-19T06:58:27.260Z"
+  }, {
+    "id": "130004",
+    "carTitle": "Porsche Cayman 718 S",
+    "amount": 67999,
+    "created": "2018-02-12T06:58:27.260Z"
+  }, {
+    "id": "130005",
+    "carTitle": "Volvo V40 Cross Country",
+    "amount": 26999,
+    "created": "2018-02-05T06:58:27.260Z"
+  }, {
+    "id": "130006",
+    "carTitle": "BMW 3 Series GT (F34)",
+    "amount": 27000,
+    "created": "2018-01-29T06:58:27.260Z"
+  }]
 }, {
   "id": "120001",
   "firstname": "Karlheinz",

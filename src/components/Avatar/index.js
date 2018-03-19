@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Wrapper from './Wrapper'
+import Styled from './Styled'
 
 export class Avatar extends React.Component {
   constructor(props) {
@@ -14,8 +14,10 @@ export class Avatar extends React.Component {
   }
 
   componentDidMount() {
-    this.img.addEventListener('load', this.onLoad, false)
-    this.img.src = this.props.src
+    if (this.img) {
+      this.img.addEventListener('load', this.onLoad, false)
+      this.img.src = this.props.src
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -27,12 +29,14 @@ export class Avatar extends React.Component {
   }
 
   componentDidUpdate() {
-    this.img.addEventListener('load', this.onLoad, false)
-    this.img.src = this.props.src
+    if (this.img) {
+      this.img.addEventListener('load', this.onLoad, false)
+      this.img.src = this.props.src
+    }
   }
 
   componentWillUnmount() {
-    this.img.removeEventListener('load', this.onLoad)
+    this.img && this.img.removeEventListener('load', this.onLoad)
   }
 
   onLoad() {
@@ -52,11 +56,15 @@ export class Avatar extends React.Component {
   }
 
   render() {
-    return (
-      <Wrapper>
-        <Wrapper.Default loaded={this.state.loaded}>{this.props.alt.slice(0,1).toUpperCase()}</Wrapper.Default>
-        <Wrapper.Img alt={this.props.alt} innerRef={node => this.img = node} />
-      </Wrapper>
+    return this.props.showLoading ? (
+      <Styled>
+        <Styled.Loading />
+      </Styled>
+    ) : (
+      <Styled>
+        <Styled.Default loaded={this.state.loaded}>{this.props.alt.slice(0,1).toUpperCase()}</Styled.Default>
+        <Styled.Img alt={this.props.alt} innerRef={node => this.img = node} />
+      </Styled>
     )
   }
 }

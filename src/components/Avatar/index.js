@@ -19,7 +19,7 @@ export class Avatar extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    this.img.removeEventListener('load', this.onLoad)
+    this.img && this.img.removeEventListener('load', this.onLoad)
 
     if (nextProps.src !== this.props.src) {
       this.setState({ loaded: false })

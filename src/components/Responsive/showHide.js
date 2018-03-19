@@ -23,6 +23,8 @@ export const showHide = (showAt = true) => {
       this.state = {
         show: true
       }
+      
+      this.onResize = this.onResize.bind(this)
     }
 
     componentWillMount() {
@@ -38,9 +40,9 @@ export const showHide = (showAt = true) => {
     }
 
     onResize() {
-      const useMin = this.prop.breakpoint.indexOf('AndAbove') > -1
-      const useMax = this.prop.breakpoint.indexOf('within') > -1
-      const matchedBreakpoint = this.breakpoints[this.prop.breakpoint]
+      const useMin = this.props.breakpoint.indexOf('AndAbove') > -1
+      const useMax = this.props.breakpoint.indexOf('within') > -1
+      const matchedBreakpoint = this.breakpoints[this.props.breakpoint]
 
       if (typeof matchedBreakpoint === typeof 1) {
         const andAbove = window.innerWidth >= matchedBreakpoint

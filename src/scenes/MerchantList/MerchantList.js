@@ -8,6 +8,7 @@ import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
 import { Pagination } from '../../components/Pagination'
 import { Placeholder } from '../../components/Placeholder'
+import { ShowAt } from '../../components/Responsive'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -152,20 +153,21 @@ export class MerchantList extends React.Component {
 
     if (data.length) {
       items.unshift(
-        <List.Item
-          noCursor
-          key="PAGINATION_TOP"
-        >
-          <Pagination
-            onPerPageChange={this.onPerPageChange}
-            perPage={this.state.perPage}
-            pageNo={this.state.pageNo}
-            results={this.props.data.length}
-            count={this.state.count}
-            onPrev={this.onPrev}
-            onNext={this.onNext}
-          />
-        </List.Item>
+        <ShowAt breakpoint="mediumAndAbove" key="PAGINATION_TOP">
+          <List.Item
+            noCursor
+          >
+            <Pagination
+              onPerPageChange={this.onPerPageChange}
+              perPage={this.state.perPage}
+              pageNo={this.state.pageNo}
+              results={this.props.data.length}
+              count={this.state.count}
+              onPrev={this.onPrev}
+              onNext={this.onNext}
+            />
+          </List.Item>
+        </ShowAt>
       )
       items.push(
         <List.Item

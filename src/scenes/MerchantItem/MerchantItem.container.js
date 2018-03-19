@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { fetchMerchantItem } from './data/actions'
+import { fetchMerchantItem } from '../../shared/data/actions'
 import MerchantItem from './MerchantItem.component'
 
 const mapStateToProps = (state) => ({

@@ -16,6 +16,11 @@ export const Button = styled.button`
   transition: background 0.15s, color 0.15s;
   will-change background, color;
 
+  &:focus {
+    outline: 1px dashed;
+    outline-offset: -4px;
+  }
+
   &:hover {
     background: #ff9702;
     color: #fff;

@@ -1,4 +1,4 @@
-import { mockFetch } from '../../../mockFetch'
+import { mockFetch } from '../../mockFetch'
 import {
   FETCHING,
   FETCHED,
@@ -39,6 +39,6 @@ export const fetchMerchantItem = id => dispatch => {
     })))
 }
 
-export const clearData = () => ({
+export const clearMerchantData = () => ({
   type: CLEAR
 })

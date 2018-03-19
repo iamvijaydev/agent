@@ -29,9 +29,8 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case FETCHING:
       return {
-        ...state,
-        isLoading: true,
-        error: defaultError
+        ...defaultState,
+        isLoading: true
       }
 
     case FETCHED:

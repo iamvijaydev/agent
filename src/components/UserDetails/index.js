@@ -2,28 +2,39 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Styled from './Styled'
+import {
+  ShowAt,
+  HideAt
+} from '../../components/Responsive'
 
 export const UserDetails = ({
-    name,
-    hasPremium,
-    email,
-    phone,
-    bids
+  name,
+  hasPremium,
+  email,
+  phone,
+  bids
 }) => {
-    return (
-        <Styled>
-            <Styled.Name>
-                {name}
-                {
-                    hasPremium &&
-                    <i className="material-icons" title="Premium">weekend</i>
-                }
-            </Styled.Name>
-            <Styled.Contact>{email}</Styled.Contact>
-            <Styled.Contact>{phone}</Styled.Contact>
-            <Styled.Bids title={`${bids} bids`}>{bids}</Styled.Bids>
-        </Styled>
-    )
+  return (
+    <Styled>
+      <Styled.Name>
+        {name}
+        {
+          hasPremium &&
+          <Styled.Premium>
+            <ShowAt breakpoint="mediumAndAbove">
+              <span>Premium</span>
+            </ShowAt>
+            <HideAt breakpoint="withinSmall">
+              <i className="material-icons" title="Premium">weekend</i>
+            </HideAt>
+          </Styled.Premium>
+        }
+      </Styled.Name>
+      <Styled.Contact>{email}</Styled.Contact>
+      <Styled.Contact>{phone}</Styled.Contact>
+      <Styled.Bids title={`${bids} bids`}>{bids}</Styled.Bids>
+    </Styled>
+  )
 }
 
 UserDetails.displayName = 'UserDetails';

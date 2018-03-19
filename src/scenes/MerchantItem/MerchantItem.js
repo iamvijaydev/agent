@@ -2,6 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
+import { Wrapper } from '../../components/Wrapper'
+import List from '../../components/List'
+import { Avatar } from '../../components/Avatar'
+import { UserDetails } from '../../components/UserDetails'
+import { Placeholder } from '../../components/Placeholder'
+import { ShowAt } from '../../components/Responsive'
 import { fetchMerchantItem } from './data/actions'
 
 export class MerchantItem extends React.Component {
@@ -23,16 +29,107 @@ export class MerchantItem extends React.Component {
     this.props.history.goBack()
   }
 
+  getContent() {
+    const {
+      data,
+      isLoading,
+      error
+    } = this.props
+
+    let message = ''
+    let status = 'default'
+
+    if (isLoading) {
+      message = 'Loading...'
+    } else if (error.has) {
+      message = 'Fetch failed!'
+      status = 'error'
+    } else if (!data.id.length) {
+      message = 'No results.'
+    }
+
+    const showMessage = (!data.id.length && message.length) || error.has
+    let items = [];
+
+    if (data.bids.length) {
+      items = data.bids.map((bid) => {
+        return (
+          <List.Item
+            key={bid.id}
+          >
+            {/* <Avatar
+              src={merchant.avatarUrl}
+              alt={`${merchant.firstname} ${merchant.lastname}`}
+            />
+            <UserDetails
+              name={`${merchant.firstname} ${merchant.lastname}`}
+              hasPremium={merchant.hasPremium}
+              email={merchant.email}
+              phone={merchant.phone}
+              bids={merchant.bids.length}
+            /> */}
+            <p>A</p>
+          </List.Item>
+        )
+      })
+    }
+
+    if (!showMessage) {
+      items.unshift(
+        <List.Item
+          noCursor
+          key={data.id}
+        >
+          <Avatar
+            src={data.avatarUrl}
+            alt={`${data.firstname} ${data.lastname}`}
+          />
+          <UserDetails
+            name={`${data.firstname} ${data.lastname}`}
+            hasPremium={data.hasPremium}
+            email={data.email}
+            phone={data.phone}
+            bids={data.bids.length}
+          />
+        </List.Item>
+      )
+      items.push(
+        <List.Item
+          noCursor
+          key="NO_BIDS"
+        >
+          <Placeholder message="No bids yet." />
+        </List.Item>
+      )
+    }
+
+    if (showMessage) {
+      items.unshift(
+        <List.Item
+          noCursor
+          key="PLACEHOLDER"
+        >
+          <Placeholder message={message} status={status} />
+        </List.Item>
+      )
+    }
+
+    return items;
+  }
+
   render() {
     return (
-      <div>
+      <Wrapper>
         <Header
           hasBackBtn
           backCallback={this.onBack}
           title="Merchant"
+          showLoader={this.props.isLoading}
         />
-        <div>View merchant details of</div>
-      </div>
+        <Wrapper.Content>
+          <List>{this.getContent()}</List>
+        </Wrapper.Content>
+      </Wrapper>
     )
   }
 }

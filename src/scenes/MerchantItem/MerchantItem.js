@@ -39,9 +39,11 @@ export class MerchantItem extends React.Component {
   }
 
   onDelete() {
-    console.log('delete')
-    window.confirm(`Delete merchant ${this.props.data.firstname}?`)
-    this.props.history.push('/')
+    
+    // No time to create fancy modal :(
+    const response = window.confirm(`Delete merchant ${this.props.data.firstname}?`)
+    
+    response && this.props.history.push('/')
   }
 
   getLoadingContent() {

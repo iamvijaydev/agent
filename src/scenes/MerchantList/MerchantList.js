@@ -8,7 +8,7 @@ import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
 import { Pagination } from '../../components/Pagination'
 import { Placeholder } from '../../components/Placeholder'
-import { ShowAt } from '../../components/Responsive'
+import { ShowAt, HideAt } from '../../components/Responsive'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {
@@ -152,7 +152,9 @@ export class MerchantList extends React.Component {
               key={i}
               noCursor
             >
-              <Avatar showLoading />
+              <ShowAt breakpoint="smallAndAbove">
+                <Avatar showLoading />
+              </ShowAt>
               <UserDetails showLoading />
             </List.Item>
           )
@@ -163,20 +165,22 @@ export class MerchantList extends React.Component {
   }
 
   getLoadedContent() {
-    const { data } = this.props;
+    const { data, isLoading } = this.props;
     let items = [];
 
-    if (data.length) {
+    if (!isLoading && data.length) {
       items = data.map((merchant) => {
         return (
           <List.Item
             key={merchant.id}
             onClick={() => this.onDetails(merchant.id)}
           >
-            <Avatar
-              src={merchant.avatarUrl}
-              alt={`${merchant.firstname} ${merchant.lastname}`}
-            />
+            <ShowAt breakpoint="smallAndAbove">
+              <Avatar
+                src={merchant.avatarUrl}
+                alt={`${merchant.firstname} ${merchant.lastname}`}
+              />
+            </ShowAt>
             <UserDetails
               name={`${merchant.firstname} ${merchant.lastname}`}
               hasPremium={merchant.hasPremium}

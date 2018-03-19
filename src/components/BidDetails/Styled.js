@@ -30,24 +30,44 @@ const Styled = styled.div`
   position: relative;
 `
 
-const Title = styled.span`
+const Amount = styled.span`
   display: block;
   font-size: 1.7rem;
   line-height: 1;
-  margin: 0 4rem 0.7rem 0;
+  margin: 0 8rem 0.7rem 0;
+`
+const AmountLoading = Loading.extend`
+  margin: 0 8rem 0.7rem 0;
+  width: 50%;
+  height: 1.7rem;
+`
+
+const Title = styled.span`
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0 8rem 0.5rem 0;
+  color: #6f6f7b;
+
+  .material-icons {
+    font-size: 1.5rem;
+    position: relative;
+    top: 2px;
+    padding-right: 0.5rem;
+    color: #d0ccc8;
+  }
 `
 const TitleLoading = Loading.extend`
-  margin: 0 4rem 0.7rem 0;
-  width: 80%;
-  height: 2rem;
+  margin: 0 8rem 0.5rem 0;
+  width: 35%;
+  height: 1.5rem;
 `
 
 const Created = styled.span`
-  display: block;
-  font-size: 1rem;
-  line-height: 1;
-  margin: 0 4rem 0.5rem 0;
-  color: #6f6f7b;
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  font-size: 1.2rem;
 
   .material-icons {
     font-size: 1.2rem;
@@ -58,40 +78,18 @@ const Created = styled.span`
   }
 `
 const CreatedLoading = Loading.extend`
-  margin: 0 4rem 0.5rem 0;
-  width: 50%;
-  height: 1.4rem;
-`
-
-const Amount = styled.span`
   position: absolute;
   top: 1rem;
   right: 0;
-  background: #e8e4e1;
-  height: 3rem;
-  border-radius: 20%;
-  text-align: center;
-  line-height: 3.1rem;
-  font-size: 1.3rem;
-  padding: 0 1.1rem;
-  border-bottom: 2px solid #fff;
-  border-right: 2px solid #fff;
-  box-shadow: 2px 2px #e8e4e1;
-`
-const AmountLoading = Loading.extend`
-  position: absolute;
-  top: 1rem;
-  right: 0;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 20%;
+  width: 7rem;
+  height: 1.2rem;
 `
 
+Styled.Amount = Amount
+Styled.AmountLoading = AmountLoading
 Styled.Title = Title
 Styled.TitleLoading = TitleLoading
 Styled.Created = Created
 Styled.CreatedLoading = CreatedLoading
-Styled.Amount = Amount
-Styled.AmountLoading = AmountLoading
 
 export default Styled

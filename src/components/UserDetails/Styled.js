@@ -56,6 +56,7 @@ const Contact = styled.span`
   line-height: 1;
   margin: 0 4rem 0.5rem 0;
   color: #6f6f7b;
+  white-space: nowrap;
 
   .material-icons {
     font-size: 1.2rem;

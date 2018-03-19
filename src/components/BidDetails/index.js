@@ -12,18 +12,24 @@ export const BidDetails = ({
   const renderLoading = () => {
     return (
       <Styled>
+        <Styled.AmountLoading />
         <Styled.TitleLoading />
         <Styled.CreatedLoading />
-        <Styled.AmountLoading />
       </Styled>
     )
   }
   const renderData = () => {
     return (
       <Styled>
-        <Styled.Title>{carTitle}</Styled.Title>
-        <Styled.Created>{created}</Styled.Created>
-        <Styled.Amount title={amount}>{amount}</Styled.Amount>
+        <Styled.Amount>&euro; {amount}</Styled.Amount>
+        <Styled.Title>
+          <i className="material-icons">drive_eta</i>
+          {carTitle}
+        </Styled.Title>
+        <Styled.Created>
+          <i className="material-icons">schedule</i>
+          {created}
+        </Styled.Created>
       </Styled>
     )
   }
@@ -41,5 +47,5 @@ BidDetails.propTypes = {
   showLoading: PropTypes.bool,
   carTitle: PropTypes.string,
   created: PropTypes.string,
-  amount: PropTypes.number
+  amount: PropTypes.string
 };

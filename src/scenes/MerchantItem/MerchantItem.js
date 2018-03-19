@@ -21,6 +21,8 @@ export class MerchantItem extends React.Component {
     }
 
     this.onBack = this.onBack.bind(this)
+    this.onEdit = this.onEdit.bind(this)
+    
   }
 
   componentWillMount() {
@@ -31,98 +33,142 @@ export class MerchantItem extends React.Component {
     this.props.history.goBack()
   }
 
-  getLoadingContent() {
-    const tenItems = Array.from({ length: 5 }, (e, i) => i)
-    let items = [];
+  onEdit() {
+    this.props.history.push(`/edit/${this.props.data.id}`)
+  }
 
-    if (this.props.isLoading) {
-      items = tenItems.map((i) => {
-        return (
+  onDelete() {
+
+  }
+
+  onDeleteConfirm() {
+
+  }
+
+  getLoadingContent() {
+    const fiveItems = Array.from({ length: 5 }, (e, i) => i)
+
+    return this.props.isLoading ? (
+      <div>
+        <List>
           <List.Item
-            key={i}
+            key="LOADING_MERCHANT"
             noCursor
           >
-            <BidDetails showLoading />
+            <ShowAt breakpoint="smallAndAbove">
+              <Avatar showLoading />
+            </ShowAt>
+            <UserDetails showLoading />
           </List.Item>
-        )
-      })
-      items.unshift(
-        <List.Item
-          key="LOADING_MERCHANT"
-          noCursor
-        >
-          <Avatar showLoading />
-          <UserDetails showLoading />
-        </List.Item>
-      )
-    }
+        </List>
+        <List>
+          {
+            fiveItems.map((i) => {
+              return (
+                <List.Item
+                  key={i}
+                  noCursor
+                >
+                  <BidDetails showLoading />
+                </List.Item>
+              )
+            })
+          }
+        </List>
+      </div>
+    ) : null
+  }
 
-    return items
+  getAmount(amount = 0) {
+    const toAry = amount.toString().split('').reverse()
+    let formated = ''
+
+    toAry.forEach((number, index) => {
+      if (index === 3 || index === 6) {
+        formated = ',' + formated;
+      }
+
+      formated = number + formated;
+    })
+
+    return formated;
+  }
+
+  getDate(created) {
+    const today = moment();
+    const someday = moment(created);
+
+    if (today.diff(someday, 'days') < 1) {
+      return `Today ${someday.format('hA')}`
+    } else {
+      return someday.format('Do MMM')
+    }
   }
 
   getLoadedContent() {
-    const { data } = this.props;
-    let items = [];
-
-    if (data.id.length) {
-
-      if (data.bids.length) {
-        items = data.bids.map((bid) => {
-          return (
-            <List.Item
-              key={bid.id}
-              noCursor
-            >
-              <BidDetails
-                carTitle={bid.carTitle}
-                created={`${moment(bid.created).format()}`}
-                amount={bid.amount}
-              />
-            </List.Item>
-          )
-        })
-      } else {
-        items.push(
+    const { data, isLoading } = this.props;
+    const bids = data.bids.length ? (
+      data.bids.map((bid) => {
+        return (
           <List.Item
+            key={bid.id}
             noCursor
-            key="NO_BIDS"
           >
-            <Placeholder message="No bids yet." />
+            <BidDetails
+              amount={this.getAmount(bid.amount)}
+              carTitle={bid.carTitle}
+              created={this.getDate(bid.created)}
+            />
           </List.Item>
         )
-      }
+      })
+    ) : (
+      <List.Item
+        noCursor
+        key="NO_BIDS"
+      >
+        <Placeholder message="No bids yet." />
+      </List.Item>
+    );
 
-      items.unshift(
-        <List.Item
-          key={data.id}
-          noCursor
-        >
-          <Avatar
-            src={data.avatarUrl}
-            alt={`${data.firstname} ${data.lastname}`}
-          />
-          <UserDetails
-            name={`${data.firstname} ${data.lastname}`}
-            hasPremium={data.hasPremium}
-            email={data.email}
-            phone={data.phone}
-            bids={data.bids.length}
-          />
-        </List.Item>
-      )
-    }
-
-    return items;
+    return data.id.length && !isLoading ? (
+      <div>
+        <List>
+          <List.Item
+            key={data.id}
+            noCursor
+          >
+            <ShowAt breakpoint="smallAndAbove">
+              <Avatar
+                src={data.avatarUrl}
+                alt={`${data.firstname} ${data.lastname}`}
+              />
+            </ShowAt>
+            <UserDetails
+              name={`${data.firstname} ${data.lastname}`}
+              hasPremium={data.hasPremium}
+              email={data.email}
+              phone={data.phone}
+              bids={data.bids.length}
+            />
+          </List.Item>
+          <List.Item noCursor>
+            <button onClick={this.onEdit}>Edit</button>
+            <button>Delete</button>
+          </List.Item>
+        </List>
+        <List>{bids}</List>
+      </div>
+    ) : null
   }
 
-  getMessage()  {
+  getMessage() {
     const {
       data,
       isLoading,
       error
     } = this.props;
 
-    let item = []
     let message = ''
     let status = 'default'
 
@@ -133,26 +179,26 @@ export class MerchantItem extends React.Component {
       message = 'No result.'
     }
 
-    if (message.length) {
-      item.push(
+    return message.length ? (
+      <List>
         <List.Item
           noCursor
           key="MESSAGE"
         >
           <Placeholder message={message} status={status} />
         </List.Item>
-      )
-    }
-
-    return item;
+      </List>
+    ) : null;
   }
 
   getContent() {
-    return [
-      ...this.getMessage(),
-      ...this.getLoadingContent(),
-      ...this.getLoadedContent()
-    ]
+    return (
+      <div>
+        {this.getMessage()}
+        {this.getLoadingContent()}
+        {this.getLoadedContent()}
+      </div>
+    )
   }
 
   render() {
@@ -165,7 +211,7 @@ export class MerchantItem extends React.Component {
           showLoader={this.props.isLoading}
         />
         <Wrapper.Content>
-          <List>{this.getContent()}</List>
+          {this.getContent()}
         </Wrapper.Content>
       </Wrapper>
     )

@@ -20,7 +20,7 @@ const Loading = styled.div`
     position: absolute;
     height: 100%;
     width: 70%;
-    background: linear-gradient(to right, rgba(122,122,122,0) 0%, rgb(175, 175, 175) 50%, rgba(122,122,122,0) 100%);
+    background: linear-gradient(to right, rgba(122,122,122,0) 0%, rgba(175, 175, 175, 0.5) 50%, rgba(122,122,122,0) 100%);
     animation: ${progress} 0.5s infinite linear;
   }
 `

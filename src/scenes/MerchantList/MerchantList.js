@@ -134,7 +134,10 @@ export class MerchantList extends React.Component {
         .from({ length: 10 }, (e, i) => i)
         .map((i) => {
           return (
-            <List.Item key={i}>
+            <List.Item
+              key={i}
+              noCursor
+            >
               <Avatar showLoading />
               <UserDetails showLoading />
             </List.Item>
@@ -162,7 +165,6 @@ export class MerchantList extends React.Component {
         )
       })
     }
-
 
     if (data.length) {
       items.unshift(

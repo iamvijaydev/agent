@@ -37,51 +37,57 @@ export class MerchantItem extends React.Component {
       error
     } = this.props
 
+    let items = []
     let message = ''
     let status = 'default'
 
-    if (isLoading) {
-      message = 'Loading...'
-    } else if (error.has) {
+    if (error.has) {
       message = 'Fetch failed!'
       status = 'error'
-    } else if (!data.id.length) {
+    } else if (!isLoading && !data.id.length) {
       message = 'No results.'
     }
 
-    const showMessage = (!data.id.length && message.length) || error.has
-    let items = [];
-
-    if (data.bids.length) {
+    if (isLoading) {
+      items = Array
+        .from({ length: 10 }, (e, i) => i)
+        .map((i) => {
+          return (
+            <List.Item
+              key={i}
+              noCursor
+            >
+              <p>Loading...</p>
+              <p>Loading...</p>
+              <p>Loading...</p>
+            </List.Item>
+          )
+        })
+        items.unshift(
+          <List.Item
+            key="test1"
+            noCursor
+          >
+            <Avatar showLoading />
+            <UserDetails showLoading />
+          </List.Item>
+        )
+    } else if (data.id.length) {
       items = data.bids.map((bid) => {
         return (
           <List.Item
             key={bid.id}
           >
-            <p>{bid.amount}</p>
             <p>{bid.carTitle}</p>
             <p>{`${moment(bid.created)}`}</p>
-            {/* <Avatar
-              src={merchant.avatarUrl}
-              alt={`${merchant.firstname} ${merchant.lastname}`}
-            />
-            <UserDetails
-              name={`${merchant.firstname} ${merchant.lastname}`}
-              hasPremium={merchant.hasPremium}
-              email={merchant.email}
-              phone={merchant.phone}
-              bids={merchant.bids.length}
-            /> */}
+            <p>{bid.amount}</p>
           </List.Item>
         )
       })
-    }
-
-    if (!showMessage) {
       items.unshift(
         <List.Item
-          noCursor
           key={data.id}
+          noCursor
         >
           <Avatar
             src={data.avatarUrl}
@@ -109,7 +115,7 @@ export class MerchantItem extends React.Component {
       }
     }
 
-    if (showMessage) {
+    if (message.length) {
       items.unshift(
         <List.Item
           noCursor
@@ -120,7 +126,7 @@ export class MerchantItem extends React.Component {
       )
     }
 
-    return items;
+    return items
   }
 
   render() {

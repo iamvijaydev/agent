@@ -46,6 +46,7 @@ const Item = styled.div`
   padding: 1.5rem 0 1rem;
   display: flex;
   cursor: ${props => props.noCursor ? 'default' : 'pointer'};
+  justify-content: ${props => props.justify ? props.justify : 'flex-start'}
 
   &:not(:last-child) {
     border-bottom: 1px solid #eaeaea;

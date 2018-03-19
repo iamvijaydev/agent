@@ -10,6 +10,7 @@ import { UserDetails } from '../../components/UserDetails'
 import { BidDetails } from '../../components/BidDetails'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
+import { Button } from '../../components/Forms'
 import { fetchMerchantItem } from './data/actions'
 
 export class MerchantItem extends React.Component {
@@ -22,7 +23,7 @@ export class MerchantItem extends React.Component {
 
     this.onBack = this.onBack.bind(this)
     this.onEdit = this.onEdit.bind(this)
-    
+    this.onDelete = this.onDelete.bind(this)
   }
 
   componentWillMount() {
@@ -38,11 +39,9 @@ export class MerchantItem extends React.Component {
   }
 
   onDelete() {
-
-  }
-
-  onDeleteConfirm() {
-
+    console.log('delete')
+    window.confirm(`Delete merchant ${this.props.data.firstname}?`)
+    this.props.history.push('/')
   }
 
   getLoadingContent() {
@@ -152,9 +151,12 @@ export class MerchantItem extends React.Component {
               bids={data.bids.length}
             />
           </List.Item>
-          <List.Item noCursor>
-            <button onClick={this.onEdit}>Edit</button>
-            <button>Delete</button>
+          <List.Item
+            noCursor
+            justify="flex-end"
+          >
+            <Button onClick={this.onEdit}>Edit</Button>
+            <Button onClick={this.onDelete}>Delete</Button>
           </List.Item>
         </List>
         <List>{bids}</List>

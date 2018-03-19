@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Styled from './Styled'
+import { Button } from '../Forms'
+import { ShowAt } from '../Responsive'
 
 export const Pagination = ({
   isLoading,
@@ -26,7 +28,9 @@ export const Pagination = ({
   return (
     <Styled>
       <Styled.PerPage>
-        <span>Items per page</span>
+        <ShowAt breakpoint="smallAndAbove">
+          <span>Items per page</span>
+        </ShowAt>
         <select
           onChange={onPerPageChange}
           value={perPage}
@@ -38,18 +42,18 @@ export const Pagination = ({
       </Styled.PerPage>
       {currentPage}
       <Styled.MovePage>
-        <button
+        <Button
           onClick={onPrev}
           disabled={disablePrev}
         >
           <i className="material-icons">chevron_left</i>
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={onNext}
           disabled={disableNext}
         >
           <i className="material-icons">chevron_right</i>
-        </button>
+        </Button>
       </Styled.MovePage>
     </Styled>
   )

@@ -31,7 +31,7 @@ export class MerchantItem extends React.Component {
   }
 
   getLoadingContent() {
-    let tenItems = Array.from({ length: 10 }, (e, i) => i)
+    const tenItems = Array.from({ length: 10 }, (e, i) => i)
     let items = [];
 
     if (this.props.isLoading) {
@@ -121,7 +121,7 @@ export class MerchantItem extends React.Component {
       error
     } = this.props;
 
-    let items = []
+    let item = []
     let message = ''
     let status = 'default'
 
@@ -133,17 +133,17 @@ export class MerchantItem extends React.Component {
     }
 
     if (message.length) {
-      items.push(
+      item.push(
         <List.Item
           noCursor
-          key="PLACEHOLDER"
+          key="MESSAGE"
         >
           <Placeholder message={message} status={status} />
         </List.Item>
       )
     }
 
-    return items;
+    return item;
   }
 
   getContent() {

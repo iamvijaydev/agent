@@ -109,30 +109,44 @@ export class MerchantList extends React.Component {
     })
   }
 
-  getContent() {
-    const {
-      isLoading,
-      data,
-      error
-    } = this.props
+  getPagination(onTop = true) {
+    const pagination = (
+      <Pagination
+        isLoading={this.props.isLoading}
+        onPerPageChange={this.onPerPageChange}
+        perPage={this.state.perPage}
+        pageNo={this.state.pageNo}
+        results={this.props.data.length}
+        count={this.state.count}
+        onPrev={this.onPrev}
+        onNext={this.onNext}
+      />
+    )
+    const key = `PAGINATION_${onTop ? 'TOP' : 'BOTTOM'}`
 
-    let items = []
-    let message = ''
-    let status = 'default'
+    return onTop ? (
+      <ShowAt
+        breakpoint="mediumAndAbove"
+        key={key}
+      >
+        <List.Item noCursor>{pagination}</List.Item>
+      </ShowAt>
+    ) : (
+        <List.Item
+          noCursor
+          key={key}
+        >
+          {pagination}
+        </List.Item>
+    )
+  }
 
-    if (error.has) {
-      message = 'Fetch failed!'
-      status = 'error'
-    } else if (!isLoading && !data.length) {
-      message = 'No results.'
-    }
+  getLoadingContent() {
+    const tenItems = Array.from({ length: 10 }, (e, i) => i)
+    let items = [];
 
-    const showMessage = (!data.length && message.length) || error.has
-
-    if (isLoading) {
-      items = Array
-        .from({ length: 10 }, (e, i) => i)
-        .map((i) => {
+    if (this.props.isLoading) {
+      items = tenItems.map((i) => {
           return (
             <List.Item
               key={i}
@@ -143,7 +157,16 @@ export class MerchantList extends React.Component {
             </List.Item>
           )
         })
-    } else {
+    }
+
+    return items;
+  }
+
+  getLoadedContent() {
+    const { data } = this.props;
+    let items = [];
+
+    if (data.length) {
       items = data.map((merchant) => {
         return (
           <List.Item
@@ -166,53 +189,51 @@ export class MerchantList extends React.Component {
       })
     }
 
-    if (data.length) {
-      items.unshift(
-        <ShowAt breakpoint="mediumAndAbove" key="PAGINATION_TOP">
-          <List.Item
-            noCursor
-          >
-            <Pagination
-              onPerPageChange={this.onPerPageChange}
-              perPage={this.state.perPage}
-              pageNo={this.state.pageNo}
-              results={this.props.data.length}
-              count={this.state.count}
-              onPrev={this.onPrev}
-              onNext={this.onNext}
-            />
-          </List.Item>
-        </ShowAt>
-      )
+    return items;
+  }
+
+  getMessage() {
+    const {
+      isLoading,
+      data,
+      error
+    } = this.props
+
+    let items = []
+    let message = ''
+    let status = 'default'
+
+    if (error.has) {
+      message = 'Fetch failed!'
+      status = 'error'
+    } else if (!isLoading && !data.length) {
+      message = 'No results.'
+    }
+
+    if (message.length) {
       items.push(
         <List.Item
           noCursor
-          key="PAGINATION_BOTTOM"
-        >
-          <Pagination
-            onPerPageChange={this.onPerPageChange}
-            perPage={this.state.perPage}
-            pageNo={this.state.pageNo}
-            results={this.props.data.length}
-            count={this.state.count}
-            onPrev={this.onPrev}
-            onNext={this.onNext}
-          />
-        </List.Item>
-      )
-    }
-    if (showMessage) {
-      items.unshift(
-        <List.Item
-          noCursor
-          key="PLACEHOLDER"
+          key="MESSAGE"
         >
           <Placeholder message={message} status={status} />
         </List.Item>
       )
     }
 
-    return items
+    return items;
+  }
+
+  getContent() {
+    const onTop = true;
+    
+    return [
+      ...this.getMessage(),
+      this.getPagination(onTop),
+      ...this.getLoadingContent(),
+      ...this.getLoadedContent(),
+      this.getPagination(!onTop)
+    ]
   }
 
   render() {

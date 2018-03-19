@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Styled from './Styled'
 
 export const Pagination = ({
+  isLoading,
   onPerPageChange,
   perPage,
   pageNo,
@@ -16,6 +17,11 @@ export const Pagination = ({
   const to = from + results - 1
   const disablePrev = pageNo === 1
   const disableNext = (perPage * pageNo) + 1 > count
+  const currentPage = isLoading ? (
+    <Styled.CurrentPage>.....</Styled.CurrentPage>
+  ) : (
+    <Styled.CurrentPage>{`${from} - ${to} of ${count}`}</Styled.CurrentPage>
+  )
 
   return (
     <Styled>
@@ -30,7 +36,7 @@ export const Pagination = ({
           <option value="20">20</option>
         </select>
       </Styled.PerPage>
-      <Styled.CurrentPage>{`${from} - ${to} of ${count}`}</Styled.CurrentPage>
+      {currentPage}
       <Styled.MovePage>
         <button
           onClick={onPrev}
@@ -51,7 +57,16 @@ export const Pagination = ({
 
 Pagination.displayName = 'Pagination';
 
+Pagination.defaultProps = {
+  isLoading: false,
+  perPage: 10,
+  pageNo: 1,
+  results: 10,
+  count: 10
+}
+
 Pagination.propTypes = {
+  isLoading: PropTypes.bool,
   onPerPageChange: PropTypes.func,
   perPage: PropTypes.number,
   pageNo: PropTypes.number,

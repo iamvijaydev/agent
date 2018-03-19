@@ -7,6 +7,7 @@ import { Wrapper } from '../../components/Wrapper'
 import List from '../../components/List'
 import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
+import { BidDetails } from '../../components/BidDetails'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
 import { fetchMerchantItem } from './data/actions'
@@ -41,9 +42,7 @@ export class MerchantItem extends React.Component {
             key={i}
             noCursor
           >
-            <p>Loading...</p>
-            <p>Loading...</p>
-            <p>Loading...</p>
+            <BidDetails showLoading />
           </List.Item>
         )
       })
@@ -74,9 +73,11 @@ export class MerchantItem extends React.Component {
               key={bid.id}
               noCursor
             >
-              <p>{bid.carTitle}</p>
-              <p>{`${moment(bid.created)}`}</p>
-              <p>{bid.amount}</p>
+              <BidDetails
+                carTitle={bid.carTitle}
+                created={`${moment(bid.created).format()}`}
+                amount={bid.amount}
+              />
             </List.Item>
           )
         })

@@ -54,6 +54,10 @@ export const UserDetails = ({
 
 UserDetails.displayName = 'UserDetails';
 
+UserDetails.defaultProps = {
+  showLoading: false
+}
+
 UserDetails.propTypes = {
   showLoading: PropTypes.bool,
   name: PropTypes.string,

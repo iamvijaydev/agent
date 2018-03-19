@@ -18,7 +18,7 @@ export const Pagination = ({
   const disablePrev = pageNo === 1
   const disableNext = (perPage * pageNo) + 1 > count
   const currentPage = isLoading ? (
-    <Styled.CurrentPage>.....</Styled.CurrentPage>
+    <Styled.CurrentPage>. . . . .</Styled.CurrentPage>
   ) : (
     <Styled.CurrentPage>{`${from} - ${to} of ${count}`}</Styled.CurrentPage>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
@@ -10,9 +9,8 @@ import { UserDetails } from '../../components/UserDetails'
 import { Pagination } from '../../components/Pagination'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
-import { fetchMerchantList } from './data/actions'
 
-export class MerchantList extends React.Component {
+export default class MerchantList extends React.Component {
   constructor(props) {
     super(props)
 
@@ -284,16 +282,3 @@ MerchantList.propTypes = {
     has: PropTypes.bool
   })
 }
-
-const mapStateToProps = state => ({
-  meta: state.merchantList.meta,
-  data: state.merchantList.data,
-  isLoading: state.merchantList.isLoading,
-  error: state.merchantList.error,
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchMerchantList: options => dispatch(fetchMerchantList(options))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MerchantList)

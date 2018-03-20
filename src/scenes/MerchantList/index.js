@@ -3,7 +3,7 @@ import Loadable from 'react-loadable';
 import { ComponentLoading } from '../../components/ComponentLoading';
 
 const LoadableComponent = Loadable({
-  loader: () => import('./MerchantList'),
+  loader: () => import('./MerchantList.container'),
   loading: ComponentLoading,
   timeout: 5000
 })

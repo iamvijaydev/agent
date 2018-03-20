@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as moment from 'moment'
 
@@ -16,10 +17,6 @@ import { fetchMerchantItem } from './data/actions'
 export class MerchantItem extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      name: ''
-    }
 
     this.onBack = this.onBack.bind(this)
     this.onEdit = this.onEdit.bind(this)
@@ -220,6 +217,30 @@ export class MerchantItem extends React.Component {
       </Wrapper>
     )
   }
+}
+
+MerchantItem.propTypes = {
+  isLoading: PropTypes.bool,
+  data: PropTypes.shape({
+    id: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    hasPremium: PropTypes.bool,
+    bids: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        carTitle: PropTypes.string,
+        amount: PropTypes.number,
+        created: PropTypes.string,
+      })
+    )
+  }),
+  error: PropTypes.shape({
+    has: PropTypes.bool
+  })
 }
 
 const mapStateToProps = (state) => ({

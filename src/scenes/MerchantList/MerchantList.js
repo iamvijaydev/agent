@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
@@ -257,6 +258,31 @@ export class MerchantList extends React.Component {
       </Wrapper>
     )
   }
+}
+
+MerchantList.propTypes = {
+  isLoading: PropTypes.bool,
+  meta: PropTypes.shape({
+    count: PropTypes.oneOfType([
+      PropTypes.oneOf([null]),
+      PropTypes.number
+    ])
+  }),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+      avatarUrl: PropTypes.string,
+      email: PropTypes.string,
+      phone: PropTypes.string,
+      hasPremium: PropTypes.bool,
+      bids: PropTypes.array
+    })
+  ),
+  error: PropTypes.shape({
+    has: PropTypes.bool
+  })
 }
 
 const mapStateToProps = state => ({

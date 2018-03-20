@@ -55,4 +55,4 @@ const Item = styled.div`
 
 List.Item = Item
 
-export default List
+export { List }

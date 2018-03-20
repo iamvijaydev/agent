@@ -19,17 +19,9 @@ const Content = styled.div`
   overflow-x: hidden;
 `
 
-export class Wrapper extends React.Component {
-  componentDidMount() {
-    const header = this.node.children[0]
-    const content = this.node.children[1]
+const Wrapper = props => <Styled>{props.children}</Styled>
 
-    console.log(header, content)
-  }
-
-  render() {
-    return <Styled innerRef={node => this.node = node}>{this.props.children}</Styled>
-  }
-}
-
+Wrapper.didplayName = 'Wrapper'
 Wrapper.Content = Content
+
+export { Wrapper }

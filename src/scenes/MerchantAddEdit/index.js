@@ -5,6 +5,7 @@ import { ComponentLoading } from '../../components/ComponentLoading';
 const LoadableComponent = Loadable({
   loader: () => import('./MerchantAddEdit'),
   loading: ComponentLoading,
+  timeout: 5000
 })
 
 export default class LoadableMerchantAddEdit extends React.Component {

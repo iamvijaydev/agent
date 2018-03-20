@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const showHide = (showAt = true) => {
   class ShowHide extends React.Component {
@@ -70,6 +71,19 @@ export const showHide = (showAt = true) => {
   }
 
   ShowHide.displayName = showAt ? 'ShowAt' : 'HideAt'
+
+  ShowHide.propTypes = {
+    breakpoint: PropTypes.oneOf([
+      'withinExtraSmall',
+      'smallAndAbove',
+      'withinSmall',
+      'mediumAndAbove',
+      'withinMedium',
+      'largeAndAbove',
+      'withinLarge',
+      'extraLargeAndAbove'
+    ]).isRequired,
+  };
 
   return ShowHide
 }

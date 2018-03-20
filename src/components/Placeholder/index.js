@@ -31,6 +31,10 @@ Placeholder.defaultProps = {
 }
 
 Placeholder.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.oneOf([
+      'success',
+      'error',
+      'default'
+    ]),
   message: PropTypes.string.isRequired
 }

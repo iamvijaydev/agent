@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
-import List from '../../components/List'
+import { List } from '../../components/List'
 import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
 import { Pagination } from '../../components/Pagination'
 import { Placeholder } from '../../components/Placeholder'
-import { ShowAt, HideAt } from '../../components/Responsive'
+import { ShowAt } from '../../components/Responsive'
 import { fetchMerchantList } from './data/actions'
 
 export class MerchantList extends React.Component {

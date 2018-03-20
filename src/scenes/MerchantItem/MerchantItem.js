@@ -4,7 +4,7 @@ import * as moment from 'moment'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
-import List from '../../components/List'
+import { List } from '../../components/List'
 import { Avatar } from '../../components/Avatar'
 import { UserDetails } from '../../components/UserDetails'
 import { BidDetails } from '../../components/BidDetails'

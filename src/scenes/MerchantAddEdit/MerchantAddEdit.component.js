@@ -10,7 +10,11 @@ import { UserDetails } from '../../components/UserDetails'
 import { BidDetails } from '../../components/BidDetails'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
-import { Button } from '../../components/Forms'
+import {
+  Button,
+  TextInput,
+  Checkbox
+} from '../../components/Forms'
 import { validator } from '../../shared/validator'
 
 export default class MerchantAddEdit extends React.Component {
@@ -352,53 +356,57 @@ export default class MerchantAddEdit extends React.Component {
                 alt={this.state.firstname}
               />
             </List.Item>
-            <List.Item>
-              <div>
-                <input
-                  type="text"
-                  name="firstname"
-                  value={this.state.firstname}
-                  placeholder="firstname"
-                  onChange={this.handleInputChange}
-                />
-                <span>{this.state.firstnameMsg}</span>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="lastname"
-                  value={this.state.lastname}
-                  placeholder="lastname"
-                  onChange={this.handleInputChange}
-                />
-                <span>{this.state.lastnameMsg}</span>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="email"
-                  value={this.state.email}
-                  placeholder="email"
-                  onChange={this.handleInputChange}
-                />
-                <span>{this.state.emailMsg}</span>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="phone"
-                  value={this.state.phone}
-                  placeholder="phone"
-                  onChange={this.handleInputChange}
-                />
-                <span>{this.state.phoneMsg}</span>
-              </div>
-              <input
-                type="checkbox"
-                name="hasPremium"
-                checked={this.state.hasPremium}
+            <List.Item noCursor>
+              <TextInput
+                name="firstname"
+                value={this.state.firstname}
+                placeholder="First name"
                 onChange={this.handleInputChange}
+                isLoading={this.props.isLoading}
+                message={this.state.firstnameMsg}
               />
+            </List.Item>
+            <List.Item noCursor>
+              <TextInput
+                name="lastname"
+                value={this.state.lastname}
+                placeholder="Last name"
+                onChange={this.handleInputChange}
+                isLoading={this.props.isLoading}
+                message={this.state.lastnameMsg}                
+              />
+            </List.Item>
+            <List.Item noCursor>
+              <TextInput
+                name="email"
+                value={this.state.email}
+                placeholder="Email"
+                onChange={this.handleInputChange}
+                isLoading={this.props.isLoading}
+                message={this.state.emailMsg}                
+              />
+            </List.Item>
+            <List.Item noCursor>
+              <TextInput
+                name="phone"
+                value={this.state.phone}
+                placeholder="Phone"
+                onChange={this.handleInputChange}
+                isLoading={this.props.isLoading}
+                message={this.state.phoneMsg}                
+              />
+            </List.Item>
+            <List.Item noCursor>
+                <Checkbox>
+                  <input
+                    type="checkbox"
+                    id="hasPremium"
+                    name="hasPremium"
+                    checked={this.state.hasPremium}
+                    onChange={this.handleInputChange}
+                  />
+                  <label htmlFor="hasPremium">Has premium</label>
+                </Checkbox>
             </List.Item>
             <List.Item
               noCursor

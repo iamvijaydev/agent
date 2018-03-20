@@ -1,10 +1,11 @@
 import React from 'react'
 import Loadable from 'react-loadable';
-import { Loading } from '../../components/Loading';
+import { ComponentLoading } from '../../components/ComponentLoading';
 
 const LoadableComponent = Loadable({
-  loader: () => import('./MerchantItem'),
-  loading: Loading,
+  loader: () => import('./MerchantItem.container'),
+  loading: ComponentLoading,
+  timeout: 5000
 })
 
 export default class LoadableMerchantItem extends React.Component {

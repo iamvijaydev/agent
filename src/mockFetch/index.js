@@ -25,7 +25,7 @@ export class MockFetch {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(this)
-      }, 300)
+      }, 1000)
     })
   }
 
@@ -75,7 +75,7 @@ export class MockFetch {
         nextPage,
         count: this._data.length
       },
-      data: this._data.slice(offset, perPage)
+      data: this._data.slice(offset, offset + perPage)
     }
   }
 

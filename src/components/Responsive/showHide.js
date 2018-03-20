@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const showHide = (showAt = true) => {
   class ShowHide extends React.Component {
@@ -23,6 +24,8 @@ export const showHide = (showAt = true) => {
       this.state = {
         show: true
       }
+      
+      this.onResize = this.onResize.bind(this)
     }
 
     componentWillMount() {
@@ -38,9 +41,9 @@ export const showHide = (showAt = true) => {
     }
 
     onResize() {
-      const useMin = this.prop.breakpoint.indexOf('AndAbove') > -1
-      const useMax = this.prop.breakpoint.indexOf('within') > -1
-      const matchedBreakpoint = this.breakpoints[this.prop.breakpoint]
+      const useMin = this.props.breakpoint.indexOf('AndAbove') > -1
+      const useMax = this.props.breakpoint.indexOf('within') > -1
+      const matchedBreakpoint = this.breakpoints[this.props.breakpoint]
 
       if (typeof matchedBreakpoint === typeof 1) {
         const andAbove = window.innerWidth >= matchedBreakpoint
@@ -68,6 +71,19 @@ export const showHide = (showAt = true) => {
   }
 
   ShowHide.displayName = showAt ? 'ShowAt' : 'HideAt'
+
+  ShowHide.propTypes = {
+    breakpoint: PropTypes.oneOf([
+      'withinExtraSmall',
+      'smallAndAbove',
+      'withinSmall',
+      'mediumAndAbove',
+      'withinMedium',
+      'largeAndAbove',
+      'withinLarge',
+      'extraLargeAndAbove'
+    ]).isRequired,
+  };
 
   return ShowHide
 }

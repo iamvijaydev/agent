@@ -10,7 +10,8 @@ export const Header = ({
   hasAction,
   actionTitle,
   actionIcon,
-  actionCallback
+  actionCallback,
+  showLoader
 }) => {
   return (
     <Styled>
@@ -33,6 +34,12 @@ export const Header = ({
           <i className="material-icons">{actionIcon}</i>
         </Styled.Action>
       }
+      {
+        !!showLoader &&
+        <Styled.Loader>
+          <Styled.IndeterminateLoader />
+        </Styled.Loader>
+      }
     </Styled>
   )
 }
@@ -50,5 +57,6 @@ Header.propTypes = {
   hasAction: PropTypes.bool,
   actionTitle: PropTypes.string,
   actionIcon: PropTypes.string,
-  actionCallback: PropTypes.func
+  actionCallback: PropTypes.func,
+  showLoader: PropTypes.bool
 };

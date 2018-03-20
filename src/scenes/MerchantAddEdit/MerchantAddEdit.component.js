@@ -11,12 +11,14 @@ import { BidDetails } from '../../components/BidDetails'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
 import { Button } from '../../components/Forms'
+import { validator } from '../../shared/validator'
 
 export default class MerchantAddEdit extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      isEditing: false,
       avatarUrl: '',
       firstname: '',
       firstnameMsg: '',
@@ -37,6 +39,7 @@ export default class MerchantAddEdit extends React.Component {
   componentWillMount() {
     if (this.props.match.params.id) {
       this.props.fetchMerchantItem(this.props.match.params.id)
+      this.setState({ isEditing: true })
     } else {
       this.props.clearMerchantData()
     }
@@ -128,54 +131,44 @@ export default class MerchantAddEdit extends React.Component {
   }
 
   validate() {
-    const notEmail = email => !/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/.test(email)
+    const keys = [
+      'firstname',
+      'lastname',
+      'email',
+      'phone'
+    ]
+    
+    const {
+      firstname,
+      lastname,
+      email,
+      phone
+    } = this.state;
+    const data = {
+      firstname,
+      lastname,
+      email,
+      phone
+    }
+
     const rules = {
       firstname: ['notEmpty'],
       lastname: ['notEmpty'],
       email: ['notEmpty', 'isEmail'],
-      phone: ['notEmpty'],
+      phone: ['notEmpty', 'isPhone'],
     }
-    const matchFields = {
-      firstname: true,
-      lastname: true,
-      email: true,
-      phone: true
-    }
-    const fields = Object.keys(this.state).filter(key => !!matchFields[key])
-    let isValid = true;
 
-    // check if any field is invalid
-    // also set a local msg for that field
-    fields.forEach(field => {
-      if (!!rules[field]) {
-        const rule = rules[field]
-        let msg = ''
-        
-        // find an invalid entry
-        const inValid = rule.findIndex(ruleName => {
+    const {
+      isValid,
+      messages
+    } = validator(keys, data, rules)
 
-          // either empty or not a valid email
-          if (ruleName === 'notEmpty' && !this.state[field].trim().length) {
-            msg = 'This field cannot be empty';
-            return true;
-          } else if (ruleName === 'isEmail' && notEmail(this.state[field])) {
-            msg = 'Please enter a valid email';
-            return true;
-          }
-
-          return false;
+    Object.keys(messages)
+      .forEach(key => {
+        this.setState({
+          [`${key}Msg`]: messages[key]
         })
-
-        // set the message for invalid field
-        // tag as invalid form
-        if (inValid > -1) {
-          this.setState({
-            [`${field}Msg`]: msg
-          })
-          isValid = false;
-        }
-      }
-    })
+      })
 
     return isValid;
   }
@@ -411,7 +404,12 @@ export default class MerchantAddEdit extends React.Component {
               noCursor
               justify="flex-end"
             >
-              <Button onClick={this.onSave}>Save</Button>
+              <Button
+                onClick={this.onSave}
+                disabled={(this.state.isEditing && this.props.isLoading) || this.props.isSaving}
+              >
+                {this.props.isSaving ? 'Saving...' : 'Save'}
+              </Button>
               <Button onClick={this.onBack}>Cancel</Button>
             </List.Item>
           </List>

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import * as moment from 'moment'
+import moment from 'moment'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
@@ -12,9 +11,8 @@ import { BidDetails } from '../../components/BidDetails'
 import { Placeholder } from '../../components/Placeholder'
 import { ShowAt } from '../../components/Responsive'
 import { Button } from '../../components/Forms'
-import { fetchMerchantItem } from './data/actions'
 
-export class MerchantItem extends React.Component {
+export default class MerchantItem extends React.Component {
   constructor(props) {
     super(props)
 
@@ -242,15 +240,3 @@ MerchantItem.propTypes = {
     has: PropTypes.bool
   })
 }
-
-const mapStateToProps = (state) => ({
-  data: state.merchantItem.data,
-  isLoading: state.merchantItem.isLoading,
-  error: state.merchantItem.error
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchMerchantItem: id => dispatch(fetchMerchantItem(id))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MerchantItem)

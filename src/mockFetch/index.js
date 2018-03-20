@@ -102,7 +102,9 @@ export class MockFetch {
 
     this._data.push({
       ...body,
-      id
+      id,
+      avatarUrl: '',
+      bids: []
     })
 
     return {

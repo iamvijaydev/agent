@@ -83,7 +83,7 @@ export class MockFetch {
     const gotMethod = this._options.method
     const method = typeof gotMethod === typeof '' ? gotMethod.toLowerCase() : ''
     const id = this.url.split('/merchant/')[1]
-    const idInt = parseInt(id, 10)
+    const idInt = parseInt(id, 10)    
     
     if (method === 'post') {
       return this._onPost()
@@ -96,13 +96,15 @@ export class MockFetch {
 
   _onPost() {
     const body = JSON.parse(this._options.body)
-    const lastId = this._data[this._data.length].id
+    const lastId = this._data[this._data.length - 1].id
     const lastIdInt = parseInt(lastId, 10)
     const id = lastIdInt + 1
 
     this._data.push({
       ...body,
-      id
+      id,
+      avatarUrl: '',
+      bids: []
     })
 
     return {

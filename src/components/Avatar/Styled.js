@@ -54,11 +54,11 @@ const Default = Box.extend`
   will-change: opacity;
 `
 
-const Img = Box.withComponent('img').extend`
-  height: auto;
-  padding: 0;
-  vertical-align: top;
+const Img = styled.img`
+  max-height: 100%;
+  min-width: 100%;
 `
+
 Styled.Loading = Loading
 Styled.Default = Default
 Styled.Img = Img

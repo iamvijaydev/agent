@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Header } from '../../components/Header'
 import { Wrapper } from '../../components/Wrapper'
@@ -308,27 +307,3 @@ export default class MerchantAddEdit extends React.Component {
     )
   }
 }
-
-// MerchantAddEdit.propTypes = {
-//   isLoading: PropTypes.bool,
-//   data: PropTypes.shape({
-//     id: PropTypes.string,
-//     firstname: PropTypes.string,
-//     lastname: PropTypes.string,
-//     avatarUrl: PropTypes.string,
-//     email: PropTypes.string,
-//     phone: PropTypes.string,
-//     hasPremium: PropTypes.bool,
-//     bids: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         id: PropTypes.string,
-//         carTitle: PropTypes.string,
-//         amount: PropTypes.number,
-//         created: PropTypes.string,
-//       })
-//     )
-//   }),
-//   error: PropTypes.shape({
-//     has: PropTypes.bool
-//   })
-// }

@@ -1,4 +1,4 @@
-import { mockFetch } from '../../mockFetch'
+import { mockFetch } from '../../services/mockFetch'
 import {
   FETCHING,
   FETCHED,

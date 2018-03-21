@@ -6,7 +6,7 @@ export const Button = styled.button`
   color: #ff9702;
   border-radius: 3px;
   line-height: 1;
-  padding: 1rem 2rem;
+  padding: ${props => props.onlyIcon ? '0.5rem 1rem' : '1rem 2rem'};
   margin: 0 0 0 1rem;
   cursor: pointer;
   outline: none;
@@ -28,8 +28,8 @@ export const Button = styled.button`
 
   &:disabled {
     cursor: default;
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #aaa;
+    border: 1px solid #e8e4e1;
+    background: #eaeaea;
+    color: #d0ccc8;
   }
 `

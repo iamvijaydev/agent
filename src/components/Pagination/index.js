@@ -31,24 +31,26 @@ export const Pagination = ({
         <ShowAt breakpoint="smallAndAbove">
           <span>Items per page</span>
         </ShowAt>
-        <select
+        <Styled.Select
           onChange={onPerPageChange}
           value={perPage}
         >
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>
-        </select>
+        </Styled.Select>
       </Styled.PerPage>
       {currentPage}
       <Styled.MovePage>
         <Button
+          onlyIcon
           onClick={onPrev}
           disabled={disablePrev}
         >
           <i className="material-icons">chevron_left</i>
         </Button>
         <Button
+          onlyIcon
           onClick={onNext}
           disabled={disableNext}
         >
